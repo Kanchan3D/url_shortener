@@ -12,6 +12,7 @@ app.use(cors({ origin: `${process.env.ORIGIN_URL}` })); // Allow frontend
 
 connectDB();
 
+app.get('/', (req, res) => res.send('API Working'));
 app.use("/", urlRoutes);
 
 const PORT = process.env.PORT;
