@@ -1,20 +1,10 @@
-const { timeStamp } = require('console')
-const mongoose=require('mongoose')
+import mongoose from "mongoose";
 
+const urlSchema = new mongoose.Schema({
+  shortId: String,
+  originalUrl: String,
+  createdAt: { type: Date, default: Date.now },
+});
 
-const urlSchema= new mongoose.Schema({
-    shortId:{
-        type:String,
-        require:true,
-        unique:true,
-    },
-    redirectUrl:{
-        type:String,
-        required:true,
-    },
-    visitHistory:[{timeStamp:{type:Number}}],
-},{timestamps:true});
-
-const URL=mongoose.model('url',urlSchema)
-
-module.exports=URL
+const Url = mongoose.model("Url", urlSchema);
+export default Url;
