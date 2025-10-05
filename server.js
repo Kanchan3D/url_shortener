@@ -7,8 +7,9 @@ import urlRoutes from "./routes/urlRoutes.js";
 dotenv.config();
 const app = express();
 
-app.use(express.json());
 app.use(cors({ origin: `${process.env.ORIGIN_URL}` })); // Allow frontend
+console.log(process.env.ORIGIN_URL)
+app.use(express.json());
 
 connectDB();
 
