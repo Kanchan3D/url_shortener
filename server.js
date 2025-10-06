@@ -7,8 +7,17 @@ import urlRoutes from "./routes/urlRoutes.js";
 dotenv.config();
 const app = express();
 
-app.use(cors({ origin: `${process.env.ORIGIN_URL}` })); // Allow frontend
-console.log(process.env.ORIGIN_URL)
+// CORS configuration for deployment
+const allowedOrigins = process.env.ORIGIN_URL 
+  ? process.env.ORIGIN_URL.split(',') 
+  : ['http://localhost:5173'];
+
+app.use(cors({ 
+  origin: allowedOrigins,
+  credentials: true 
+}));
+
+console.log('Allowed origins:', allowedOrigins);
 app.use(express.json());
 
 connectDB();
@@ -16,5 +25,5 @@ connectDB();
 app.get('/', (req, res) => res.send('API Working'));
 app.use("/", urlRoutes);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
